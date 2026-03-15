@@ -1,15 +1,15 @@
 import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
-from dotenv import load_dotenv
 
-# Agar lokal ishga tushirayotgan bo‘lsangiz
-# load_dotenv()  # .env fayldan TOKEN olish uchun
+# TOKEN environment variable orqali olinadi
 TOKEN = os.getenv("BOT_TOKEN")
-print("TOKEN:", TOKEN)  # tekshirish uchun
+print("TOKEN:", TOKEN)  # logda tokenni tekshirish uchun
 
+# Guruh ID larini saqlash uchun set
 groups = set()
 
+# Guruhdagi xabarlarni boshqa guruhlarga yuboruvchi handler
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
     message = update.message
@@ -26,9 +26,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if group != chat.id:
                 try:
                     await context.bot.send_message(group, msg)
-                except:
-                    pass
+                except Exception as e:
+                    print(f"Xatolik: {e}")
 
+# Botni ishga tushirish
 app = ApplicationBuilder().token(TOKEN).build()
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
