@@ -1,11 +1,9 @@
 import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
-from dotenv import load_dotenv
-
-load_dotenv()
 
 TOKEN = os.getenv("8603653853:AAFaqGCNrMhVMgTSgkvb7h-9iZV1MG6eWH8")
+print("TOKEN:", TOKEN)
 
 groups = set()
 
