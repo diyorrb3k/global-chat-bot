@@ -1,10 +1,6 @@
 import os
-from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
-
-TOKEN = os.getenv("8603653853:AAFaqGCNrMhVMgTSgkvb7h-9iZV1MG6eWH8")
+TOKEN = os.getenv("BOT_TOKEN")
 print("TOKEN:", TOKEN)
-
 groups = set()
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
